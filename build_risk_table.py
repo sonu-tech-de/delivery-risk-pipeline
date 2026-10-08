@@ -77,6 +77,6 @@ try:
     conn.commit()
     print(f"Saved {len(rows)} rows to risk_daily")
 
-
+finally:
     cursor.close()
     conn.close()
