@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 def get_connection():
     return mysql.connector.connect(
         host=os.getenv("DB_HOST"),
@@ -13,7 +12,6 @@ def get_connection():
         password=os.getenv("DB_PASSWORD"),
         database=os.getenv("DB_NAME")
     )
-
 
 conn = get_connection()
 cursor = conn.cursor()
@@ -30,7 +28,7 @@ try:
     cursor.execute(query)
     df = pd.DataFrame(cursor.fetchall(), columns=cursor.column_names)
 
-    # --- 2. TRANSFORM: add flags and score ---
+    
     df["date"] = pd.to_datetime(df["date"])
     df["is_weekend"] = df["date"].dt.dayofweek >= 5
     df["is_holiday"] = df["holiday_name"].notna()
@@ -44,7 +42,7 @@ try:
 
     print(df)
 
-    # --- 3. LOAD: save into risk_daily ---
+    
     clean = df.astype(object).where(df.notna(), None)
 
     rows = []
@@ -79,6 +77,6 @@ try:
     conn.commit()
     print(f"Saved {len(rows)} rows to risk_daily")
 
-finally:
+
     cursor.close()
     conn.close()
