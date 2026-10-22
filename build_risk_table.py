@@ -32,9 +32,9 @@ try:
     df["date"] = pd.to_datetime(df["date"])
     df["is_weekend"] = df["date"].dt.dayofweek >= 5
     df["is_holiday"] = df["holiday_name"].notna()
-    df["high_wind_risk"] = df["windspeed_max"] >= 40   # km/h
-    df["heavy_rain_risk"] = df["precipitation"] >= 5   # mm
-    df["freezing_risk"] = df["temp_min"] <= 0          # °C
+    df["high_wind_risk"] = df["windspeed_max"] >= 40   
+    df["heavy_rain_risk"] = df["precipitation"] >= 5   
+    df["freezing_risk"] = df["temp_min"] <= 0          
 
     flag_cols = ["is_weekend", "is_holiday", "high_wind_risk",
                  "heavy_rain_risk", "freezing_risk"]

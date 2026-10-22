@@ -4,13 +4,15 @@ from bs4 import BeautifulSoup
 import mysql.connector
 import os
 from dotenv import load_dotenv
+from datetime import date
+YEAR = date.today().year
 
 GERMAN_MONTHS = {
     "Januar": 1, "Februar": 2, "März": 3, "April": 4,
     "Mai": 5, "Juni": 6, "Juli": 7, "August": 8,
     "September": 9, "Oktober": 10, "November": 11, "Dezember": 12
 }
-YEAR = 2026
+
 
 def parse_german_date(date_raw):
     day_str, month_str = date_raw.replace(".", "").split()
